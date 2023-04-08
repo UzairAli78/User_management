@@ -1,0 +1,31 @@
+class User:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+class Teacher(User):
+    def __init__(self, username, password, first_name, last_name, subject):
+        super().__init__(username, password)
+        self.first_name = first_name
+        self.last_name = last_name
+        self.subject = subject
+
+class UserManager:
+    def __init__(self):
+        self.users = []
+
+    def add_user(self, user):
+        self.users.append(user)
+
+    def remove_user(self, user):
+        self.users.remove(user)
+
+    def login(self, username, password):
+        for user in self.users:
+            if user.username == username and user.password == password:
+                return True
+        return False
+
+    def get_teachers_by_subject(self, subject):
+        return [user for user in self.users if isinstance(user, Teacher) and user.subject == subject]
+
